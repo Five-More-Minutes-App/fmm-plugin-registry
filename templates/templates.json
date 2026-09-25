@@ -1,0 +1,20 @@
+[
+  {
+    "id": "node",
+    "name": "Node.js starter",
+    "description": "A dependency-free client, an event helper and a working example, with tests and a mock of the API. Start here if you write JavaScript.",
+    "language": "JavaScript (Node.js 20+)",
+    "platform": "Any computer with Node.js",
+    "repository": "https://github.com/five-more-minutes/fmm-plugin-template-node",
+    "commit": "450f740bf375d58e0c332a70340f3ea6791ae37e"
+  },
+  {
+    "id": "python",
+    "name": "Python starter",
+    "description": "An aiohttp client, an event helper and a working example, with tests and a mock of the API. Start here if you write Python.",
+    "language": "Python 3.11+",
+    "platform": "Any computer with Python",
+    "repository": "https://github.com/five-more-minutes/fmm-plugin-template-python",
+    "commit": "7b2dce416bee8375e679725b0f977c7bbcfea96a"
+  }
+]

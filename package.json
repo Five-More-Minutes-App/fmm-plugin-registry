@@ -1,0 +1,21 @@
+{
+  "name": "fmm-plugin-registry",
+  "version": "1.0.0",
+  "description": "The catalogue of Five More Minutes plugins: one folder per plugin, validated by CI, built into the catalog.json the marketplace and the portal read.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "validate:manifest": "node scripts/validate.mjs --manifest",
+    "build": "node scripts/build-catalog.mjs",
+    "verify": "node scripts/verify-pinned.mjs",
+    "test": "node --test \"test/*.test.mjs\""
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1"
+  }
+}
