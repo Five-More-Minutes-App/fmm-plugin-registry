@@ -57,6 +57,7 @@ It reads the icon next to the manifest as well.
 | `homepage`, `issues` | Optional https links |
 | `icon` | Always `"icon.png"`, at the root of the repository. See below |
 | `categories` | 1–3 of `smart-home`, `network`, `automation`, `notifications`, `developer`, `other` |
+| `requiresHub` | Optional. `true` when the plugin is a program that has to run on the family's network, so it needs the **Home Hub** (or another always-on machine) to run it. Leave it out, or `false`, when it runs inside an app the family already has (Home Assistant, Homey). The marketplace shows it, and the portal offers to set the hub up |
 | `platform` | Where it runs, so a family knows what they need: `Home Assistant`, `Homey Pro`, `Docker`, `Node.js` |
 | `permissions` | 1–5 of the scopes below, each with a `reason`. See below |
 | `install.steps` | 1–12 steps, each with a `title` and `text`, optionally a `code` block and a `link`. See below |

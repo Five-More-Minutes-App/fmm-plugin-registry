@@ -95,6 +95,10 @@
       "maxLength": 40,
       "pattern": "^[^\\u0000-\\u001f<>]+$"
     },
+    "requiresHub": {
+      "description": "True when the plugin is a program that has to run on the family's network, and so needs the Home Hub (or something else always on at home) to run it. False, or left out, when it runs inside another app the family already has, such as Home Assistant or Homey.",
+      "type": "boolean"
+    },
     "permissions": {
       "description": "What the plugin's key may do to the one computer it is made for, and why. The parent sees this before agreeing, and the service refuses anything outside it.",
       "type": "array",

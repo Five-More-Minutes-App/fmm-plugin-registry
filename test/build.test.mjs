@@ -58,6 +58,15 @@ describe('building the catalogue', () => {
     assert.deepEqual(names, ['Zeta fmm-a', 'Zeta fmm-b', 'Aardvark']);
   });
 
+  it('says whether a plugin needs the hub, and is never left guessing', () => {
+    const { root } = registry({ alpha: { manifest: manifest('alpha', { requiresHub: true }) }, beta: {} });
+    const { plugins } = loadRegistry(root);
+
+    const byId = Object.fromEntries(buildCatalog({ plugins, templates: [] }, NOW).plugins.map((p) => [p.id, p.requiresHub]));
+
+    assert.deepEqual(byId, { alpha: true, beta: false });
+  });
+
   it('gives an example project its download address, pinned to the commit', () => {
     const catalog = buildCatalog({ plugins: [], templates: [template] }, NOW);
 

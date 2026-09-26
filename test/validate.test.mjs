@@ -39,6 +39,20 @@ describe('a good manifest', () => {
   });
 });
 
+describe('needing the hub', () => {
+  it('may say it does, or that it does not, or say nothing', () => {
+    for (const requiresHub of [true, false, undefined]) {
+      assert.deepEqual(checkManifest(manifest('sample', { requiresHub })), [], String(requiresHub));
+    }
+  });
+
+  it('has to be a real true or false', () => {
+    for (const bad of ['yes', 'true', 1, 0, null, {}, []]) {
+      assert.ok(checkManifest(manifest('sample', { requiresHub: bad })).length > 0, JSON.stringify(bad));
+    }
+  });
+});
+
 describe('what a plugin may ask for', () => {
   it('only the permissions a key can have', () => {
     for (const scope of ['admin', '*', 'household:read', 'keys:create', 'devices:list', 'State:Read']) {

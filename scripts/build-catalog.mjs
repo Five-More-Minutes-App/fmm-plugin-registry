@@ -43,6 +43,7 @@ export function buildCatalog({ plugins, templates }, now) {
       ...(manifest.issues ? { issues: manifest.issues } : {}),
       categories: manifest.categories,
       platform: manifest.platform,
+      requiresHub: manifest.requiresHub === true,
       permissions: manifest.permissions,
       install: manifest.install,
       compatibility: manifest.compatibility,

@@ -6,7 +6,7 @@
     "language": "JavaScript (Node.js 20+)",
     "platform": "Any computer with Node.js",
     "repository": "https://github.com/five-more-minutes/fmm-plugin-template-node",
-    "commit": "450f740bf375d58e0c332a70340f3ea6791ae37e"
+    "commit": "8852dfcd0b3d629d8455d5309a64dde6092ebbd1"
   },
   {
     "id": "python",
@@ -15,6 +15,6 @@
     "language": "Python 3.11+",
     "platform": "Any computer with Python",
     "repository": "https://github.com/five-more-minutes/fmm-plugin-template-python",
-    "commit": "7b2dce416bee8375e679725b0f977c7bbcfea96a"
+    "commit": "8c98f08526df09a8202a06e7bc3f58fcc6fe312c"
   }
 ]
