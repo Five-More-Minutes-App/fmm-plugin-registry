@@ -69,6 +69,11 @@ Reviewers are volunteers, and the aim is to say yes. A comment is about the plug
 disagree, say so; a reviewer can be wrong. If a plugin is declined, you will be told why, and you can try
 again when it is fixed.
 
+Neither the validation nor the review is optional or skippable, for a first listing or an update: GitHub
+itself refuses to merge a pull request that has not passed `ci.yml` and been approved by whoever
+[CODEOWNERS](.github/CODEOWNERS) names for the paths it touches (see the README's
+[What is listed is what was reviewed](README.md#what-is-listed-is-what-was-reviewed)).
+
 ## Conduct
 
 Be kind. Assume good faith. Keep the families who will use what you build in mind: they are trusting you with

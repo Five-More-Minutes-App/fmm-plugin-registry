@@ -1,0 +1,27 @@
+# Who has to approve a pull request before it can merge, once branch protection (see
+# scripts/setup-branch-protection.sh) turns "Require review from Code Owners" on. GitHub then
+# auto-requests these people/teams and blocks merging without their approval - for a brand-new
+# plugin listing and for a one-line re-pin alike, because both are pull requests that touch a
+# path below.
+#
+# Replace these placeholder teams with real ones in the five-more-minutes GitHub organisation
+# before relying on this file - a handle CODEOWNERS can't resolve to an org member is silently
+# ignored by GitHub, not an error, so a wrong name here would quietly turn the gate off.
+
+# Default: anything not matched more specifically still needs a maintainer.
+*                                       @five-more-minutes/maintainers
+
+# A plugin listing, new or updated: reviewed against docs/review-checklist.md. This is the path
+# a community contributor's pull request actually touches.
+/plugins/                              @five-more-minutes/plugin-reviewers
+
+# The example projects offered as starters.
+/templates/                            @five-more-minutes/plugin-reviewers
+
+# Everything that decides what "valid" and "verified" mean, or how a listing is checked and
+# published - a narrower, more senior review than an individual listing needs, since a mistake
+# here can affect every plugin at once.
+/verified-owners.json                  @five-more-minutes/maintainers
+/schema/                               @five-more-minutes/maintainers
+/scripts/                              @five-more-minutes/maintainers
+/.github/                              @five-more-minutes/maintainers

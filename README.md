@@ -1,6 +1,6 @@
 # Five More Minutes plugin registry
 
-The list of plugins in the [Five More Minutes](https://github.com/five-more-minutes/FiveMoreMinutes)
+The list of plugins in the [Five More Minutes](https://github.com/five-more-minutes/fmm-app)
 marketplace. It is a git repository: a plugin is listed by a pull request, reviewed like any other change,
 and published as a static `catalog.json` the marketplace website and the portal read.
 
@@ -27,6 +27,21 @@ steps they are told to follow, are those. A plugin cannot change what is shown b
 repository: to ship a new version, its author opens another pull request with the new commit, and it is
 reviewed again.
 
+**Both halves are enforced by GitHub itself, not just asked for**, on every pull request - a brand-new
+listing and a one-line re-pin alike:
+
+- **Validation.** [`ci.yml`](.github/workflows/ci.yml) runs `npm run validate` (the manifest and listing
+  against `schema/`), `npm run verify` (byte-for-byte against the pinned commit, over the network),
+  `npm test` and `npm run build`, on every pull request and a weekly schedule that catches a listing going
+  stale after the fact (a repository rewritten or deleted since it was pinned).
+- **Approval.** [`.github/CODEOWNERS`](.github/CODEOWNERS) names who has to approve a change to
+  `plugins/`, `templates/`, `schema/`, `scripts/` and `verified-owners.json`. Branch protection on `main`
+  (set up once with [`scripts/setup-branch-protection.sh`](scripts/setup-branch-protection.sh)) requires
+  that approval and a green check before anything merges - for repository admins too.
+
+A pull request cannot bypass either half: it cannot merge with a failing check, and it cannot merge without
+the review CODEOWNERS names, regardless of who opens it.
+
 ## Add a plugin
 
 1. Build it. Start from a [starter project](templates/templates.json) if you like: the marketplace's **Build a plugin** page has them, with a key made for your own computer.
@@ -50,8 +65,9 @@ Full details, including what makes a good listing, are in [CONTRIBUTING.md](CONT
 
 ## Update a plugin
 
-Open a pull request changing `commit` (and `plugin.json` / `icon.png` if they changed). A pull request that
-only re-pins is quick to review: the reviewer reads the diff between the two commits.
+Open a pull request changing `commit` (and `plugin.json` / `icon.png` if they changed). It goes through the
+same validation and the same CODEOWNERS approval as a first listing - there is no faster path for an update,
+only a faster review: the reviewer reads the diff between the two commits rather than the whole plugin again.
 
 ## Remove a plugin
 

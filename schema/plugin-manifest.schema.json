@@ -109,7 +109,7 @@
         "additionalProperties": false,
         "required": ["scope", "reason"],
         "properties": {
-          "scope": { "enum": ["state:read", "timer:start", "timer:extend", "timer:stop", "timer:cancel"] },
+          "scope": { "enum": ["state:read", "timer:start", "timer:extend", "timer:stop", "timer:cancel", "requests:read"] },
           "reason": {
             "description": "Why the plugin needs it, in a sentence a parent can weigh.",
             "type": "string",

@@ -85,6 +85,7 @@ and the service refuses anything outside it.
 | `timer:extend` | Add time to a running timer |
 | `timer:stop` | End the time now (the computer locks, as if time ran out) |
 | `timer:cancel` | Cancel a running timer, without locking |
+| `requests:read` | See when the child asks for more time, and the words they wrote with it |
 
 The `reason` (10–160 characters) is a sentence a parent can weigh: *why does this need to start time?* A
 plugin that only shows a countdown asks for `state:read` and nothing else, and a reviewer will ask why

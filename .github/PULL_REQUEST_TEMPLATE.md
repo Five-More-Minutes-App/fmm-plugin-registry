@@ -8,7 +8,7 @@
 
 ## Permissions
 
-<!-- Which of state:read / timer:start / timer:extend / timer:stop / timer:cancel it asks for, and why each is needed.
+<!-- Which of state:read / timer:start / timer:extend / timer:stop / timer:cancel / requests:read it asks for, and why each is needed.
      If this pins a new version that asks for MORE than before, say what changed and why. -->
 
 ## Checklist
