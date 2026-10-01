@@ -5,7 +5,7 @@ takes. This page is the whole process. The [README](README.md) is the overview.
 
 ## Before you start
 
-- A plugin talks to **one computer's** Five More Minutes over its **local** plugin API, with a key a parent made. Read the API documentation in the Five More Minutes repository (`docs/plugins/api-v1.md`) and its security notes.
+- A plugin talks to **one computer's** Five More Minutes over its **local** plugin API, with a key a parent made. Read the [API documentation](https://api.fivemoreminutes.app/docs) and the [security notes](https://marketplace.fivemoreminutes.app/#/security).
 - Start from a starter: the marketplace's **Build a plugin** page gives you a **Node.js** or **Python** project with a working client, an event helper and tests, and can make a key for your own computer so you can try it.
 - Keep it small, and ask for as little as you need. The smallest plugin that does something useful is the easiest to review, and the easiest for a family to trust.
 

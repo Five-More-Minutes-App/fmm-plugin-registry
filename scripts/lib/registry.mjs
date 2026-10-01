@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { inflateSync } from 'node:zlib';
 import Ajv from 'ajv';
 
-/** The permissions a key can have. Mirrors the service's closed list (ADR 6). */
+/** The permissions a key can have. Mirrors the service's closed list. */
 export const SCOPES = ['state:read', 'timer:start', 'timer:extend', 'timer:stop', 'timer:cancel', 'requests:read'];
 
 /** The only placeholders an installation step may use, and only inside a code block. */
