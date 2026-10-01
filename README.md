@@ -1,6 +1,6 @@
 # Five More Minutes plugin registry
 
-The list of plugins in the [Five More Minutes](https://github.com/five-more-minutes/fmm-app)
+The list of plugins in the [Five More Minutes](https://fivemoreminutes.app)
 marketplace. It is a git repository: a plugin is listed by a pull request, reviewed like any other change,
 and published as a static `catalog.json` the marketplace website and the portal read.
 
