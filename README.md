@@ -89,12 +89,11 @@ icons) to GitHub Pages on every merge to `main`.
 
 ## The plugins made by Five More Minutes
 
-Marked **verified**, because they are made and maintained by the project itself (the
-`five-more-minutes` organisation, listed in `verified-owners.json`):
-
-- [`unifi`](https://github.com/five-more-minutes/fmm-plugin-unifi): block chosen devices while the computer is locked.
-- [`homey`](https://github.com/five-more-minutes/fmm-plugin-homey): control the timer, and use it in flows.
-- [`home-assistant`](https://github.com/five-more-minutes/fmm-plugin-home-assistant): sensors, events, buttons and actions.
+None are listed yet. UniFi, Homey and Home Assistant integrations are planned - each will be its
+own repository under the `five-more-minutes` organisation (listed in `verified-owners.json`) and
+marked **verified** once it exists, passes review, and is pinned to a real commit `npm run verify`
+can check. Draft manifests for all three existed here before their repositories did, which this
+registry's own `verify` step correctly refused to publish - see commit history for them.
 
 "Verified" means *made by the project*; it is not a security audit, and no plugin is trusted with more
 than the permissions its key was given. See [docs/review-checklist.md](docs/review-checklist.md).
