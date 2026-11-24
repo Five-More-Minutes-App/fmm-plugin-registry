@@ -44,6 +44,13 @@ family I know added this?*
 - [ ] Dependencies are few, well known, and pinned by a lockfile.
 - [ ] No obfuscated code, no minified code without its source, no downloading and running code at run time.
 
+## A plugin that needs the Home Hub
+
+- [ ] It has a `Dockerfile` at the root, and the `images` check built it.
+- [ ] Its image runs as a non-root user and writes only to `/data` and `/tmp`.
+- [ ] Every setting it needs can be given as an environment variable (the Hub gives it no inbound port, so no settings page).
+- [ ] It talks to at most one device on the home network, the one the parent names as `LOCAL_DEVICE`.
+
 ## When a new commit is pinned
 
 - [ ] Read the diff between the old commit and the new one, not the whole plugin again.

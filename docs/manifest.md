@@ -110,6 +110,28 @@ At least one step must use `{{API_KEY}}`, or the plugin would have no key to use
 Good steps say what to do, in the order to do it, and what to expect: *"Run this. You should see the
 computer's name."*
 
+## A plugin the Home Hub runs
+
+With `requiresHub: true`, the registry's CI also builds the plugin into a container image, from the `Dockerfile` at the
+root of its repository at exactly the pinned commit, for `linux/amd64` and `linux/arm64`, and pushes it to
+`ghcr.io/five-more-minutes-app/plugins/<id>`. The catalogue names that image by its digest, and that image is the only thing
+a family's Home Hub will run for the plugin: never one from the author's own registry, never a tag. A new version reaches
+families when its listing is pinned to a new commit, and not before.
+
+What the Hub gives the container, and all it gives it:
+
+| | |
+|---|---|
+| `FMM_URL`, `FMM_API_KEY` | The service, and the plugin's own key: one computer, the permissions the parent ticked |
+| `HTTPS_PROXY`, `HTTP_PROXY` | The plugin's own proxy. It is the only way out, and it lets through only the service and the one device below |
+| `DATA_DIR=/data` | A volume of its own that survives updates. The rest of the filesystem is read-only; `/tmp` is small and in memory |
+| The parent's settings | Whatever the parent set with `fmm-hub settings <id> set NAME=value`, for example `UNIFI_URL` |
+| `LOCAL_DEVICE` | The one device on the home network it may reach, if the parent set one |
+
+It runs with no Linux capabilities, as an unprivileged container, with half a CPU and 256 MB of memory, and **no inbound
+port**: nothing on the network can reach it. A settings page the plugin serves cannot be opened while the Hub runs it, so
+everything a plugin needs must be settable as an environment variable. Say which in its README.
+
 ## Keep it in sync
 
 `plugins/<id>/plugin.json` and `icon.png` in this registry must be byte-for-byte the ones in your repository
