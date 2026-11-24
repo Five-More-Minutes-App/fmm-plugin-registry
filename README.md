@@ -87,6 +87,12 @@ npm test
 `dist/catalog.json` is what the marketplace and the portal fetch. CI builds it and publishes it (with the
 icons) to GitHub Pages on every merge to `main`.
 
+## Images for the Home Hub
+
+For each plugin with `requiresHub: true`, CI builds its `Dockerfile` at the pinned commit and pushes it to
+`ghcr.io/five-more-minutes-app/plugins/<id>`, once per commit (`scripts/build-images.mjs`). The catalogue names the image by
+digest, and that is the only image a family's Home Hub runs for it. See [docs/manifest.md](docs/manifest.md#a-plugin-the-home-hub-runs).
+
 ## The plugins made by Five More Minutes
 
 Marked **verified**, because they are made and maintained by the project itself (the

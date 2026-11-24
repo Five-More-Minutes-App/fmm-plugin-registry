@@ -28,6 +28,37 @@ jobs:
       - name: Every listing matches its repository at the pinned commit
         run: npm run verify
       - run: npm run build
+
+  images:
+    # The image the Home Hub runs for each plugin that needs it, built from the reviewed commit (ADR 9 in fmm-app). On a pull
+    # request it is only built, so a Dockerfile that does not build is caught before it is listed; on main it is pushed to
+    # ghcr.io/five-more-minutes-app/plugins/<id>, once per commit. This job holds the one write permission, to packages, and
+    # nothing else.
+    needs: check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130 # v3
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+      - if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build the Home Hub images
+        run: node scripts/build-images.mjs --out images.json ${{ (github.ref == 'refs/heads/main' && github.event_name != 'pull_request') && '--push' || '' }}
+      - name: Build the catalogue with them
+        run: npm run build -- --images images.json
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
           path: dist
@@ -35,7 +66,7 @@ jobs:
   publish:
     # The catalog and the icons are published as a static site: what the marketplace and the portal read.
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    needs: check
+    needs: images
     runs-on: ubuntu-latest
     permissions:
       pages: write

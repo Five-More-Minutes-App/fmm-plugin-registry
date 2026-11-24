@@ -227,3 +227,42 @@ describe('checking a listing against its repository', () => {
     assert.notEqual(canonical([1, 2]), canonical([2, 1]));
   });
 });
+
+describe('the image the Home Hub runs', () => {
+  const digest = 'a'.repeat(64);
+  const ours = (id) => `ghcr.io/five-more-minutes-app/plugins/${id}@sha256:${digest}`;
+
+  it('is named for a plugin that needs the hub, once it has been built', () => {
+    const { root } = registry({ hubbed: { manifest: manifest('hubbed', { requiresHub: true }) } });
+    const catalog = buildCatalog({ plugins: loadRegistry(root).plugins, templates: [] }, NOW, { hubbed: ours('hubbed') });
+
+    assert.equal(catalog.plugins[0].image, ours('hubbed'));
+  });
+
+  it('is left out until it has been built', () => {
+    const { root } = registry({ hubbed: { manifest: manifest('hubbed', { requiresHub: true }) } });
+    const catalog = buildCatalog({ plugins: loadRegistry(root).plugins, templates: [] }, NOW);
+
+    assert.equal('image' in catalog.plugins[0], false);
+  });
+
+  it('is never given to a plugin that does not need the hub', () => {
+    const { root } = registry({ inside: {} });
+    const catalog = buildCatalog({ plugins: loadRegistry(root).plugins, templates: [] }, NOW, { inside: ours('inside') });
+
+    assert.equal('image' in catalog.plugins[0], false);
+  });
+
+  for (const [what, ref] of [
+    ['a tag, which moves', 'ghcr.io/five-more-minutes-app/plugins/hubbed:latest'],
+    ["the author's own registry", `ghcr.io/somebody/hubbed@sha256:${digest}`],
+    ["another plugin's image", ours('other')],
+  ]) {
+    it(`is refused when it is ${what}`, () => {
+      const { root } = registry({ hubbed: { manifest: manifest('hubbed', { requiresHub: true }) } });
+      const catalog = buildCatalog({ plugins: loadRegistry(root).plugins, templates: [] }, NOW, { hubbed: ref });
+
+      assert.equal('image' in catalog.plugins[0], false);
+    });
+  }
+});
